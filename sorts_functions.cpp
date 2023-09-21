@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "sorts_functions.h"
 #include "my_asserts.h"
 
@@ -18,8 +17,19 @@ bool comp_str(const void* x1, const void* x2){
     my_assert(x1 != NULL, printf("pointer to first compared element is NULL\n"); return false);
     my_assert(x2 != NULL, printf("pointer to second compared element is NULL\n"); return false);
     my_assert(x1 != x2, printf("you compare one element with himself\n"); return false);
-    if(strcmp((const char*)x1, (const char*)x2) > 0){
-        return true;
+    int index = 0;
+
+    while((*((*((const char*const*)x1)) + index) != '\n') && (*((*((const char*const*)x1)) + index) != '\0') && (*((*((const char*const*)x2)) + index) != '\n') && (*((*((const char*const*)x2)) + index) != '\0')){
+        if(*((*((const char*const*)x1)) + index) > *((*((const char*const*)x2)) + index)){
+            return true;
+        }
+        if(*((*((const char*const*)x1)) + index) < *((*((const char*const*)x2)) + index)){
+            return false;
+        }
+        index++;
+    }
+    if(*((*((const char*const*)x1)) + index) == '\n' || *((*((const char*const*)x2)) + index) == '\0'){
+        return false;
     }
     return false;
 }
@@ -58,6 +68,8 @@ void bubble_sort(const int size_of_element, void* start, void* finish, bool(comp
     int len = len_of_mass(size_of_element, start, finish);
 
     while(was_swaps){
+
+
         was_swaps = false;
         for(int i = 0; i < len - 1; i++){
             my_assert((char*)start + (i + 1) * size_of_element < finish, printf("exit from finish\n"); return);
