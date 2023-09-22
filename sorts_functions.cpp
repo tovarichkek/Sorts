@@ -16,7 +16,6 @@ bool comp_int(const void* x1, const void* x2){
 bool comp_str(const void* x1, const void* x2){
     my_assert(x1 != NULL, printf("pointer to first compared element is NULL\n"); return false);
     my_assert(x2 != NULL, printf("pointer to second compared element is NULL\n"); return false);
-    my_assert(x1 != x2, printf("you compare one element with himself\n"); return false);
     int index = 0;
 
     while((*((*((const char*const*)x1)) + index) != '\n') && (*((*((const char*const*)x1)) + index) != '\0') && (*((*((const char*const*)x2)) + index) != '\n') && (*((*((const char*const*)x2)) + index) != '\0')){
